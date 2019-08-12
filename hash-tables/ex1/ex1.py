@@ -9,13 +9,26 @@ from hashtables import (HashTable,
 def get_indices_of_item_weights(weights, length, limit):
     ht = HashTable(16)
 
-    """
-    YOUR CODE HERE
-    """
+# if there aren't at least two weights return None
+    if length < 2:
+        return None
+    
+    for weight in range(length):
+        hash_table_insert(ht, weights[weight], weight)
+    
+    for weight in range(length):
+        first = weights[weight]
+        second = limit - first
+        node = hash_table_retrieve(ht, second)
+        if node is not None:
+            #checking larger value to place it first
+            if node > weight:
+                returnResult = (node, weight)
+            elif node < weight:
+                returnResult = (weight, node)
 
-    return None
-
-
+    print("here is the return", returnResult)
+    return returnResult
 def print_answer(answer):
     if answer is not None:
         print(str(answer[0] + " " + answer[1]))
